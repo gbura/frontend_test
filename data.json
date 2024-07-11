@@ -1,9 +1,30 @@
 [
-	"Pierwsze zdanie do uzupełnienia.",
-	"Kolejna próba stworzenia ciekawego zdania.",
-	"To jest przykładowe trzecie zdanie.",
-	"Jeszcze jedno zdanie, tym razem czwarte.",
-	"Długie zdanie: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis accusantium, voluptate nemo laboriosam autem quia atque. Vitae ad recusandae quisquam odio ipsum eos distinctio mollitia corporis! Iusto dolore debitis maiores.",
-	"Pięć to liczba tego zdania.",
-	"Na zakończenie, szóste i ostatnie zdanie."
+	{
+		"id": 1,
+		"quote": "Pierwsze zdanie do uzupełnienia."
+	},
+	{
+		"id": 2,
+		"quote": "Kolejna próba stworzenia ciekawego zdania."
+	},
+	{
+		"id": 3,
+		"quote": "To jest przykładowe trzecie zdanie."
+	},
+	{
+		"id": 4,
+		"quote": "Jeszcze jedno zdanie, tym razem czwarte."
+	},
+	{
+		"id": 5,
+		"quote": "Długie zdanie: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis accusantium, voluptate nemo laboriosam autem quia atque. Vitae ad recusandae quisquam odio ipsum eos distinctio mollitia corporis! Iusto dolore debitis maiores."
+	},
+	{
+		"id": 6,
+		"quote": "Sześć to liczba tego zdania."
+	},
+	{
+		"id": 7,
+		"quote": "Na zakończenie, siódme i ostatnie zdanie."
+	}
 ]
