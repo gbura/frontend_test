@@ -1,0 +1,57 @@
+@import 'colors.scss';
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+*,
+*::after,
+*::before,
+#app {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html,
+body {
+	min-height: 100%;
+	font-family: 'Open Sans', sans-serif;
+	background-color: $main-background;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+a {
+	text-decoration: none;
+}
+
+img {
+	height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+	font-family: inherit;
+}
+
+button {
+	border: none;
+	cursor: pointer;
+}
+
+textarea {
+	resize: vertical;
+	overflow: auto;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+h1,
+h2 {
+	color: $main-text;
+}

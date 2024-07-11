@@ -1,0 +1,67 @@
+<template>
+	<div class="block-content">
+		<h2 class="block-content__title">blok drugi</h2>
+		<div class="block-content__buttons">
+			<button @click="emits('replace')">zastąp</button>
+			<button @click="emits('add')">doklej</button>
+		</div>
+	</div>
+</template>
+
+<script setup lang="ts">
+const emits = defineEmits(['replace', 'add'])
+</script>
+
+<style lang="scss" scoped>
+@import '@/assets/main.scss';
+
+.block-content {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	width: 50%;
+	&__title {
+		text-align: right;
+		text-transform: uppercase;
+		font-size: 1.3rem;
+	}
+
+	&__buttons {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		margin-top: 3rem;
+
+		button {
+			text-transform: uppercase;
+			background-color: transparent;
+			border: 1px solid $light-text;
+			color: $light-text;
+			padding: 0.7rem 3rem;
+			font-weight: bold;
+			border-radius: 2px;
+
+			&:hover {
+				cursor: pointer;
+				background: linear-gradient(45deg, $hover-orange, #f0a549);
+				color: $main-text;
+			}
+		}
+	}
+}
+@media (min-width: 1024px) {
+	.block-content {
+		width: 33%;
+		align-items: center;
+
+		&__title {
+			text-align: center;
+		}
+
+		&__buttons {
+			flex-direction: row;
+			justify-content: center;
+		}
+	}
+}
+</style>
