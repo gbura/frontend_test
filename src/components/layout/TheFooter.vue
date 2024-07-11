@@ -166,6 +166,7 @@ const showInfo = () => {
 				&:hover {
 					color: $main-text;
 					border-color: $main-text;
+					transition: border-color 0.5s ease, color 0.5s ease;
 				}
 			}
 		}

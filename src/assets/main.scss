@@ -17,11 +17,12 @@
 html,
 body {
 	position: relative;
+	min-height: 100vh;
 	margin: 0;
 	padding: 0;
 	font-family: 'Open Sans', sans-serif;
 	background-color: $main-background;
-	overflow: hidden;
+	overflow-x: hidden;
 }
 
 html {

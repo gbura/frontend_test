@@ -6,7 +6,7 @@
 		<div class="main__content">
 			<BlockOne v-model="selectedOption" />
 			<BlockTwo @replace="replaceQuote" @add="addQuote" />
-			<BlockThree :quotes="quoteTexts" />
+			<BlockThree :quotes="quoteObjects" @deleteQuote="deleteQuote" @updateQuote="updateQuote" />
 		</div>
 	</main>
 	<TheFooter @resetSettings="resetSettings" @showInfo="showInfo" />
@@ -21,7 +21,7 @@ import BlockThree from '@/components/BlockThree.vue'
 import database from '../../data.json'
 import { Options, type Quote } from '@/types/OptionsType'
 import { useToast } from 'vue-toastification'
-import { computed, ref } from 'vue'
+import { computed, ref, watch, onMounted } from 'vue'
 
 const toast = useToast()
 const db = database
@@ -30,9 +30,15 @@ const selectedOption = ref<string>('')
 
 const addedQuotes = ref<Array<Quote>>([])
 
-const quoteTexts = computed<string[]>(() => {
-	return addedQuotes.value.map((item: Quote) => item.quote)
+const quoteObjects = computed<{ id: number; quote: string }[]>(() => {
+	return addedQuotes.value.map((item: Quote) => ({ id: item.id, quote: item.quote }))
 })
+
+const updateLocalStorage = () => {
+	localStorage.setItem('quotes', JSON.stringify(addedQuotes.value))
+}
+
+watch(addedQuotes, updateLocalStorage, { deep: true })
 
 const replaceQuote = () => {
 	switch (selectedOption.value) {
@@ -51,6 +57,7 @@ const replaceQuote = () => {
 			toast.error('You have to choose some option in block one.')
 			break
 	}
+	updateLocalStorage()
 }
 
 const addQuote = () => {
@@ -88,6 +95,20 @@ const addQuote = () => {
 		toast.error(`The quote with id ${newQuote.id} is already added.`)
 	} else {
 		addedQuotes.value.push(newQuote)
+		updateLocalStorage()
+	}
+}
+
+const deleteQuote = (id: number) => {
+	addedQuotes.value = addedQuotes.value.filter((quote: Quote) => quote.id !== id)
+	updateLocalStorage()
+}
+
+const updateQuote = ({ id, quote }: Quote) => {
+	const quoteIndex = addedQuotes.value.findIndex((quote: Quote) => quote.id === id)
+	if (quoteIndex !== -1) {
+		addedQuotes.value[quoteIndex].quote = quote
+		updateLocalStorage()
 	}
 }
 
@@ -97,12 +118,25 @@ const resetSettings = () => {
 	isNameShown.value = false
 	selectedOption.value = ''
 	addedQuotes.value = []
+
+	localStorage.removeItem('quotes')
 }
 
 const isNameShown = ref<boolean>(false)
 const showInfo = () => {
 	isNameShown.value = true
 }
+
+onMounted(() => {
+	const storedQuotes = localStorage.getItem('quotes')
+	if (storedQuotes) {
+		try {
+			addedQuotes.value = JSON.parse(storedQuotes)
+		} catch (error) {
+			console.error('Error while getting quotes from local storage.', error)
+		}
+	}
+})
 </script>
 
 <style lang="scss" scoped>
