@@ -1,33 +1,33 @@
 <template>
 	<footer class="footer">
-		<Transition name="slide">
-			<div class="modal" v-if="isModalOpen">
-				<div class="modal__container">
-					<button @click="resetSettings" aria-label="Zresetuj ustawienia">
-						<font-awesome-icon :icon="['fas', 'angle-right']" class="icon" /> zresetuj ustawienia
+		<Transition name="footer__slide">
+			<div class="footer__modal" v-if="isModalOpen">
+				<div class="footer__modal-container">
+					<button @click="resetSettings" aria-label="Zresetuj ustawienia" class="footer__modal-button">
+						<font-awesome-icon :icon="['fas', 'angle-right']" class="footer__icon" /> zresetuj ustawienia
 					</button>
-					<button @click="showInfo" aria-label="Pokaż dane osobowe">
-						<font-awesome-icon :icon="['fas', 'angle-right']" class="icon" /> pokaż dane osobowe
+					<button @click="showInfo" aria-label="Pokaż dane osobowe" class="footer__modal-button">
+						<font-awesome-icon :icon="['fas', 'angle-right']" class="footer__icon" /> pokaż dane osobowe
 					</button>
 				</div>
 			</div>
 		</Transition>
 		<div class="footer__container">
-			<div class="footer__container--text">
-				<p>
+			<div class="footer__text">
+				<p class="footer__text-content">
 					css<br />
 					is <br />
 					awesome
 				</p>
 			</div>
-			<div class="footer__container--company">
-				<p aria-label="Nazwa firmy nabthat">nabthat</p>
+			<div class="footer__company">
+				<p class="footer__company-name" aria-label="Nazwa firmy nabthat">nabthat</p>
 			</div>
-			<div class="footer__container--button">
-				<button @click="openModal" aria-label="Pokaż">
+			<div class="footer__button-container">
+				<button @click="openModal" aria-label="Pokaż" class="footer__button">
 					pokaż
-					<font-awesome-icon :icon="['fas', 'angle-up']" v-if="!isModalOpen" class="icon" />
-					<font-awesome-icon :icon="['fas', 'angle-down']" v-else />
+					<font-awesome-icon :icon="['fas', 'angle-up']" v-if="!isModalOpen" class="footer__icon" />
+					<font-awesome-icon :icon="['fas', 'angle-down']" v-else class="footer__icon" />
 				</button>
 			</div>
 		</div>
@@ -55,16 +55,16 @@ const showInfo = () => {
 <style lang="scss" scoped>
 @import '@/assets/main.scss';
 
-.slide-enter-active {
+.footer__slide-enter-active {
 	transition: all 0.3s ease-out;
 }
 
-.slide-leave-active {
+.footer__slide-leave-active {
 	transition: all 0.5s ease-out;
 }
 
-.slide-enter-from,
-.slide-leave-to {
+.footer__slide-enter-from,
+.footer__slide-leave-to {
 	transform: translateY(20px);
 	opacity: 0;
 }
@@ -81,99 +81,100 @@ const showInfo = () => {
 		align-items: center;
 		height: 85px;
 		padding: 0 1rem;
+	}
 
-		&--text {
-			width: 5.5rem;
+	&__text {
+		width: 5.5rem;
+		position: relative;
+		padding: 0 0.2rem;
+		overflow: hidden;
+
+		&-content {
+			color: $main-background;
+			text-transform: uppercase;
 			position: relative;
-			padding: 0 0.2rem;
-			overflow: hidden;
+			z-index: 1;
+		}
 
-			p {
-				color: $main-background;
-				text-transform: uppercase;
-				position: relative;
-				z-index: 1;
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 75%;
+			height: 100%;
+			border: 1px solid $main-background;
+			transition: transform 2s ease-out;
+			z-index: 0;
+		}
+
+		&:hover::before {
+			transform: rotate(360deg);
+			border-color: $hover-orange;
+		}
+
+		&:hover &-content {
+			color: $light-text;
+		}
+
+		&:hover {
+			cursor: pointer;
+		}
+	}
+
+	&__company {
+		display: none;
+		position: relative;
+		margin-left: 6rem;
+
+		&-name {
+			color: $main-background;
+			position: relative;
+			padding: 0 1rem;
+
+			&::before,
+			&::after {
+				content: '';
+				position: absolute;
+				top: 50%;
+				width: 50px;
+				height: 1px;
+				background-color: $main-background;
 			}
 
 			&::before {
-				content: '';
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 75%;
-				height: 100%;
-				border: 1px solid $main-background;
-				transition: transform 2s ease-out;
-				z-index: 0;
+				left: -40px;
 			}
 
-			&:hover::before {
-				transform: rotate(360deg);
-				border-color: $hover-orange;
+			&::after {
+				right: -40px;
 			}
+		}
+	}
 
-			&:hover p {
-				color: $light-text;
-			}
+	&__button-container {
+		button {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 0.5rem;
+			padding: 0.5rem 4rem;
+			background-color: transparent;
+			border: 1px solid $main-background;
+			font-weight: bold;
+			color: $light-text;
+			text-transform: uppercase;
 
 			&:hover {
-				cursor: pointer;
-			}
-		}
-
-		&--company {
-			display: none;
-			position: relative;
-			margin-left: 7rem;
-
-			p {
-				color: $main-background;
-				position: relative;
-				padding: 0 1rem;
-
-				&::before,
-				&::after {
-					content: '';
-					position: absolute;
-					top: 50%;
-					width: 50px;
-					height: 1px;
-					background-color: $main-background;
-				}
-				&::before {
-					left: -40px;
-				}
-
-				&::after {
-					right: -40px;
-				}
-			}
-		}
-
-		&--button {
-			button {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				gap: 0.5rem;
-				padding: 0.5rem 4rem;
-				background-color: transparent;
-				border: 1px solid $main-background;
-				font-weight: bold;
-				color: $light-text;
-				text-transform: uppercase;
-
-				&:hover {
-					color: $main-text;
-					border-color: $main-text;
-					transition: border-color 0.5s ease, color 0.5s ease;
-				}
+				color: $main-text;
+				border-color: $main-text;
+				transition: border-color 0.5s ease, color 0.5s ease;
 			}
 		}
 	}
 }
 
-.modal {
+.footer__modal {
 	position: absolute;
 	top: -3.7rem;
 	right: 1rem;
@@ -185,11 +186,11 @@ const showInfo = () => {
 	box-shadow: 0 0 20px black;
 	background-color: #fff;
 
-	&__container {
+	&-container {
 		padding: 0.5rem 0 0.5rem 1rem;
 	}
 
-	button {
+	&-button {
 		text-align: left;
 		background-color: transparent;
 		text-transform: uppercase;
@@ -206,13 +207,11 @@ const showInfo = () => {
 	.footer {
 		padding: 0rem 2rem;
 
-		&__container {
-			&--company {
-				display: block;
-			}
+		&__company {
+			display: flex;
 		}
 	}
-	.modal {
+	.footer__modal {
 		right: 3rem;
 	}
 }

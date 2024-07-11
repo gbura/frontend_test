@@ -1,14 +1,14 @@
 <template>
 	<header class="header">
 		<RouterLink to="/" class="header__logo" aria-label="Link do strony głównej">
-			<font-awesome-icon :icon="['fab', 'html5']" class="header__logo--icon" />
+			<font-awesome-icon :icon="['fab', 'html5']" class="header__logo-icon" />
 		</RouterLink>
 		<div class="header__title">
-			<p class="header__title--text" aria-label="Zadanie rekrutacyjne.">
-				Zadanie <span class="header__title--span">rekrutacyjne</span>
+			<p class="header__title-text" aria-label="Zadanie rekrutacyjne.">
+				Zadanie <span class="header__title-span">rekrutacyjne</span>
 			</p>
-			<Transition name="slide">
-				<p class="header__title--name" v-if="isNameShown" aria-label="Dawid Gburczyk">Dawid Gburczyk</p>
+			<Transition name="header__slide">
+				<p class="header__title-name" v-if="isNameShown" aria-label="Dawid Gburczyk">Dawid Gburczyk</p>
 			</Transition>
 		</div>
 	</header>
@@ -21,16 +21,16 @@ defineProps(['isNameShown'])
 <style scoped lang="scss">
 @import '@/assets/main.scss';
 
-.slide-enter-active {
+.header__slide-enter-active {
 	transition: all 0.3s ease-out;
 }
 
-.slide-leave-active {
+.header__slide-leave-active {
 	transition: all 0.5s ease-out;
 }
 
-.slide-enter-from,
-.slide-leave-to {
+.header__slide-enter-from,
+.header__slide-leave-to {
 	transform: translateX(20px);
 	opacity: 0;
 }
@@ -58,7 +58,7 @@ defineProps(['isNameShown'])
 			transition: background-color 0.3s;
 		}
 
-		&--icon {
+		&-icon {
 			width: 35px;
 			height: 35px;
 			color: $main-text;
@@ -68,11 +68,17 @@ defineProps(['isNameShown'])
 	&__title {
 		color: $main-text;
 
-		&--span {
+		&-text {
+			font-size: 1rem;
+		}
+
+		&-span {
 			font-weight: bold;
 		}
-		&--name {
+
+		&-name {
 			text-align: right;
+			font-size: 1rem;
 		}
 	}
 }
@@ -85,17 +91,17 @@ defineProps(['isNameShown'])
 			width: 70px;
 			height: 70px;
 
-			&--icon {
+			&-icon {
 				width: 45px;
 				height: 45px;
 			}
 		}
 
 		&__title {
-			&--text {
+			&-text {
 				font-size: 1.4rem;
 			}
-			&--name {
+			&-name {
 				font-size: 1.4rem;
 			}
 		}

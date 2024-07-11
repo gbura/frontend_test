@@ -2,7 +2,7 @@
 	<TheHeader :isNameShown="isNameShown" />
 	<main class="main">
 		<h1 class="main__title" aria-label="Nagłówek H1">Nagłówek H1</h1>
-		<hr />
+		<hr class="main__separator" />
 		<div class="main__content">
 			<BlockOne v-model="selectedOption" />
 			<BlockTwo @replace="replaceQuote" @add="addQuote" />
@@ -30,7 +30,7 @@ const selectedOption = ref<string>('')
 
 const addedQuotes = ref<Array<Quote>>([])
 
-const quoteObjects = computed<{ id: number; quote: string }[]>(() => {
+const quoteObjects = computed<Quote[]>(() => {
 	return addedQuotes.value.map((item: Quote) => ({ id: item.id, quote: item.quote }))
 })
 
@@ -150,6 +150,11 @@ onMounted(() => {
 		margin-bottom: 1rem;
 	}
 
+	&__separator {
+		margin: 0 auto;
+		width: 160px;
+	}
+
 	&__content {
 		display: flex;
 		justify-content: space-between;
@@ -158,24 +163,15 @@ onMounted(() => {
 	}
 }
 
-hr {
-	margin: 0 auto;
-	width: 160px;
-}
-
 @media (min-width: 960px) {
-	.main {
-		&__content {
-			padding: 1rem 0rem;
-		}
+	.main__content {
+		padding: 1rem 0;
 	}
 }
 
 @media (min-width: 1024px) {
-	.main {
-		&__content {
-			padding: 1rem 2rem;
-		}
+	.main__content {
+		padding: 1rem 2rem;
 	}
 }
 </style>

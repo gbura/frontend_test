@@ -1,8 +1,8 @@
 <template>
 	<div class="block-content">
 		<h2 class="block-content__title" aria-label="Blok pierwszy">blok pierwszy</h2>
-		<div class="block-content__buttons-container">
-			<div class="radio-content" v-for="option in options" :key="option.value">
+		<div class="block-content__buttons">
+			<div class="block-content__radio" v-for="option in options" :key="option.value">
 				<input
 					type="radio"
 					:id="option.value"
@@ -11,7 +11,7 @@
 					name="option"
 					v-model="model"
 					@change="emitSelectedOption" />
-				<label :for="option.value">{{ option.label }}</label>
+				<label :for="option.value" class="block-content__label">{{ option.label }}</label>
 			</div>
 		</div>
 	</div>
@@ -44,61 +44,65 @@ watch(model, () => {
 
 .block-content {
 	width: 50%;
+
 	&__title {
 		text-align: left;
 		text-transform: uppercase;
 		font-size: 1.3rem;
 	}
-	&__buttons-container {
+
+	&__buttons {
 		display: flex;
 		flex-direction: column;
 		gap: 2rem;
 		margin-top: 2rem;
+	}
 
-		.radio-content {
-			display: flex;
-			gap: 1rem;
-			color: $light-text;
+	&__radio {
+		display: flex;
+		gap: 1rem;
+		color: $light-text;
 
-			input[type='radio'] {
-				display: none;
+		input[type='radio'] {
+			display: none;
 
-				& + label {
-					position: relative;
-					padding-left: 3rem;
-					cursor: pointer;
-				}
+			& + .block-content__label {
+				position: relative;
+				padding-left: 3rem;
+				cursor: pointer;
+			}
 
-				& + label::before {
-					content: '';
-					position: absolute;
-					left: 0;
-					top: 50%;
-					transform: translateY(-50%);
-					width: 2rem;
-					height: 2rem;
-					border: 2px solid $main-text;
-					border-radius: 50%;
-					background-color: transparent;
-				}
-				& + label::after {
-					content: '';
-					position: absolute;
-					left: 5.5%;
-					top: 50%;
-					transform: translateY(-50%);
-					width: 1rem;
-					height: 1rem;
-					border-radius: 50%;
-					background-color: transparent;
-				}
-				&:checked + label::after {
-					background-color: $main-text;
-				}
+			& + .block-content__label::before {
+				content: '';
+				position: absolute;
+				left: 0;
+				top: 50%;
+				transform: translateY(-50%);
+				width: 2rem;
+				height: 2rem;
+				border: 2px solid $main-text;
+				border-radius: 50%;
+				background-color: transparent;
+			}
 
-				&:checked + label {
-					color: $main-text;
-				}
+			& + .block-content__label::after {
+				content: '';
+				position: absolute;
+				left: 5.5%;
+				top: 50%;
+				transform: translateY(-50%);
+				width: 1rem;
+				height: 1rem;
+				border-radius: 50%;
+				background-color: transparent;
+			}
+
+			&:checked + .block-content__label::after {
+				background-color: $main-text;
+			}
+
+			&:checked + .block-content__label {
+				color: $main-text;
 			}
 		}
 	}
@@ -112,7 +116,7 @@ watch(model, () => {
 			text-align: center;
 		}
 
-		&__buttons-container {
+		&__buttons {
 			margin-top: 3rem;
 		}
 	}

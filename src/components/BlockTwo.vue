@@ -2,8 +2,10 @@
 	<div class="block-content">
 		<h2 class="block-content__title" aria-label="Blok drugi">blok drugi</h2>
 		<div class="block-content__buttons">
-			<button @click="emits('replace')" aria-label="Przycisk zastąp">zastąp</button>
-			<button @click="emits('add')" aria-label="Przycisk doklej">doklej</button>
+			<button @click="emits('replace')" class="block-content__buttons--button" aria-label="Przycisk zastąp">
+				zastąp
+			</button>
+			<button @click="emits('add')" class="block-content__buttons--button" aria-label="Przycisk doklej">doklej</button>
 		</div>
 	</div>
 </template>
@@ -20,6 +22,7 @@ const emits = defineEmits(['replace', 'add'])
 	flex-direction: column;
 	align-items: flex-end;
 	width: 50%;
+
 	&__title {
 		text-align: right;
 		text-transform: uppercase;
@@ -32,7 +35,7 @@ const emits = defineEmits(['replace', 'add'])
 		gap: 1rem;
 		margin-top: 3rem;
 
-		button {
+		&--button {
 			text-transform: uppercase;
 			background-color: transparent;
 			border: 1px solid $light-text;
@@ -41,14 +44,16 @@ const emits = defineEmits(['replace', 'add'])
 			font-weight: bold;
 			border-radius: 2px;
 			cursor: pointer;
+			transition: background-color 0.3s, color 0.3s;
 
 			&:hover {
-				background: linear-gradient(45deg, $hover-orange, #f0a549);
+				background-color: $hover-orange;
 				color: $main-text;
 			}
 		}
 	}
 }
+
 @media (min-width: 960px) {
 	.block-content {
 		width: 33%;

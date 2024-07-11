@@ -119,10 +119,11 @@ const deleteQuote = (id: number) => {
 		&__input {
 			width: 100%;
 			padding: 0.7rem 1rem;
+			background-color: transparent;
 			border: 1px solid $light-text;
 			border-radius: 2px;
-			background-color: transparent;
 			color: $light-text;
+
 			outline-color: $light-text;
 		}
 
