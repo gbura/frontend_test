@@ -76,7 +76,7 @@ Wszystkie główne cele zadania są wykonane.
 - Doklejane treści sortują się alfabetycznie.
 - Przy doklejaniu treści w przypadku braku spełnienia warunku, wyświetla się animowany modal (vue-toastification).
 - Button "pokaż" w footerze wysuwa modal z kolejnymi buttonami do obsługi funkcji na stronie.
-- Praca wrzucona na netlify:
+- Praca wrzucona na netlify: https://frontend-recruitment-test.netlify.app
 - Wykorzystanie localStorage do obsługi treści .json.
 - Przetrzymywanie, wyświetlanie, dodawanie, usuwanie i edycja treści z .json przy pomocy localStorage.
 - Nałożone dodatkowe animacje na elementy na stronie.
