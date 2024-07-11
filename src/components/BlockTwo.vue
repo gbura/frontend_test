@@ -1,9 +1,9 @@
 <template>
 	<div class="block-content">
-		<h2 class="block-content__title">blok drugi</h2>
+		<h2 class="block-content__title" aria-label="Blok drugi">blok drugi</h2>
 		<div class="block-content__buttons">
-			<button @click="emits('replace')">zastąp</button>
-			<button @click="emits('add')">doklej</button>
+			<button @click="emits('replace')" aria-label="Przycisk zastąp">zastąp</button>
+			<button @click="emits('add')" aria-label="Przycisk doklej">doklej</button>
 		</div>
 	</div>
 </template>
@@ -40,16 +40,16 @@ const emits = defineEmits(['replace', 'add'])
 			padding: 0.7rem 3rem;
 			font-weight: bold;
 			border-radius: 2px;
+			cursor: pointer;
 
 			&:hover {
-				cursor: pointer;
 				background: linear-gradient(45deg, $hover-orange, #f0a549);
 				color: $main-text;
 			}
 		}
 	}
 }
-@media (min-width: 1024px) {
+@media (min-width: 960px) {
 	.block-content {
 		width: 33%;
 		align-items: center;

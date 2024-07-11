@@ -1,12 +1,13 @@
 <template>
 	<div class="block-content">
-		<h2 class="block-content__title">blok pierwszy</h2>
+		<h2 class="block-content__title" aria-label="Blok pierwszy">blok pierwszy</h2>
 		<div class="block-content__buttons-container">
 			<div class="radio-content" v-for="option in options" :key="option.value">
 				<input
 					type="radio"
 					:id="option.value"
 					:value="option.value"
+					:aria-label="option.value"
 					name="option"
 					v-model="model"
 					@change="emitSelectedOption" />
@@ -103,7 +104,7 @@ watch(model, () => {
 	}
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 960px) {
 	.block-content {
 		width: 33%;
 

@@ -1,15 +1,17 @@
 <template>
 	<footer class="footer">
-		<div class="modal" v-if="isModalOpen">
-			<div class="modal__container">
-				<button @click="resetSettings">
-					<font-awesome-icon :icon="['fas', 'angle-right']" class="icon" /> zresetuj ustawienia
-				</button>
-				<button @click="showInfo">
-					<font-awesome-icon :icon="['fas', 'angle-right']" class="icon" /> pokaż dane osobowe
-				</button>
+		<Transition name="slide">
+			<div class="modal" v-if="isModalOpen">
+				<div class="modal__container">
+					<button @click="resetSettings" aria-label="Zresetuj ustawienia">
+						<font-awesome-icon :icon="['fas', 'angle-right']" class="icon" /> zresetuj ustawienia
+					</button>
+					<button @click="showInfo" aria-label="Pokaż dane osobowe">
+						<font-awesome-icon :icon="['fas', 'angle-right']" class="icon" /> pokaż dane osobowe
+					</button>
+				</div>
 			</div>
-		</div>
+		</Transition>
 		<div class="footer__container">
 			<div class="footer__container--text">
 				<p>
@@ -19,10 +21,10 @@
 				</p>
 			</div>
 			<div class="footer__container--company">
-				<p>nabthat</p>
+				<p aria-label="Nazwa firmy nabthat">nabthat</p>
 			</div>
 			<div class="footer__container--button">
-				<button @click="openModal">
+				<button @click="openModal" aria-label="Pokaż">
 					pokaż
 					<font-awesome-icon :icon="['fas', 'angle-up']" v-if="!isModalOpen" class="icon" />
 					<font-awesome-icon :icon="['fas', 'angle-down']" v-else />
@@ -39,6 +41,7 @@ const isModalOpen = ref<boolean>(false)
 const openModal = () => (isModalOpen.value = !isModalOpen.value)
 
 const emits = defineEmits(['resetSettings', 'showInfo'])
+
 const resetSettings = () => {
 	emits('resetSettings')
 	isModalOpen.value = false
@@ -51,6 +54,20 @@ const showInfo = () => {
 
 <style lang="scss" scoped>
 @import '@/assets/main.scss';
+
+.slide-enter-active {
+	transition: all 0.3s ease-out;
+}
+
+.slide-leave-active {
+	transition: all 0.5s ease-out;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+	transform: translateY(20px);
+	opacity: 0;
+}
 
 .footer {
 	position: absolute;
@@ -66,22 +83,41 @@ const showInfo = () => {
 		padding: 0 1rem;
 
 		&--text {
-			width: 67px;
-			border: 1px solid $main-background;
+			width: 5.5rem;
+			position: relative;
 			padding: 0 0.2rem;
+			overflow: hidden;
 
 			p {
 				color: $main-background;
 				text-transform: uppercase;
+				position: relative;
+				z-index: 1;
+			}
+
+			&::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 75%;
+				height: 100%;
+				border: 1px solid $main-background;
+				transition: transform 2s ease-out;
+				z-index: 0;
+			}
+
+			&:hover::before {
+				transform: rotate(360deg);
+				border-color: $hover-orange;
+			}
+
+			&:hover p {
+				color: $light-text;
 			}
 
 			&:hover {
 				cursor: pointer;
-				border-color: $hover-orange;
-
-				p {
-					color: $light-text;
-				}
 			}
 		}
 
@@ -165,7 +201,7 @@ const showInfo = () => {
 	}
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 960px) {
 	.footer {
 		padding: 0rem 2rem;
 

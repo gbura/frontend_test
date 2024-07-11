@@ -1,11 +1,15 @@
 <template>
 	<header class="header">
-		<RouterLink to="/" class="header__logo">
+		<RouterLink to="/" class="header__logo" aria-label="Link do strony głównej">
 			<font-awesome-icon :icon="['fab', 'html5']" class="header__logo--icon" />
 		</RouterLink>
 		<div class="header__title">
-			<p class="header__title--text">Zadanie <span class="header__title--span">rekrutacyjne</span></p>
-			<p class="header__title--name" v-if="isNameShown">Dawid Gburczyk</p>
+			<p class="header__title--text" aria-label="Zadanie rekrutacyjne.">
+				Zadanie <span class="header__title--span">rekrutacyjne</span>
+			</p>
+			<Transition name="slide">
+				<p class="header__title--name" v-if="isNameShown" aria-label="Dawid Gburczyk">Dawid Gburczyk</p>
+			</Transition>
 		</div>
 	</header>
 </template>
@@ -16,6 +20,20 @@ defineProps(['isNameShown'])
 
 <style scoped lang="scss">
 @import '@/assets/main.scss';
+
+.slide-enter-active {
+	transition: all 0.3s ease-out;
+}
+
+.slide-leave-active {
+	transition: all 0.5s ease-out;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+	transform: translateX(20px);
+	opacity: 0;
+}
 
 .header {
 	display: flex;
@@ -37,6 +55,7 @@ defineProps(['isNameShown'])
 
 		&:hover {
 			background-color: $hover-orange;
+			transition: background-color 0.3s;
 		}
 
 		&--icon {
@@ -58,7 +77,7 @@ defineProps(['isNameShown'])
 	}
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 960px) {
 	.header {
 		padding: 1rem 2rem;
 

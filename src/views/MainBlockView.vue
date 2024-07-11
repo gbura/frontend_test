@@ -1,7 +1,7 @@
 <template>
 	<TheHeader :isNameShown="isNameShown" />
 	<main class="main">
-		<h1 class="main__title">Nagłówek H1</h1>
+		<h1 class="main__title" aria-label="Nagłówek H1">Nagłówek H1</h1>
 		<hr />
 		<div class="main__content">
 			<BlockOne v-model="selectedOption" />
@@ -48,11 +48,17 @@ const replaceQuote = () => {
 			addedQuotes.value = [remainingQuotes[randomIndex]]
 			break
 		default:
+			toast.error('You have to choose some option in block one.')
 			break
 	}
 }
 
 const addQuote = () => {
+	if (!selectedOption.value) {
+		toast.error('You have to choose some option in block one.')
+		return
+	}
+
 	const unusedQuotes = db.filter(item => !addedQuotes.value.some(added => added.id === item.id))
 
 	if (unusedQuotes.length === 0) {
@@ -121,6 +127,14 @@ const showInfo = () => {
 hr {
 	margin: 0 auto;
 	width: 160px;
+}
+
+@media (min-width: 960px) {
+	.main {
+		&__content {
+			padding: 1rem 0rem;
+		}
+	}
 }
 
 @media (min-width: 1024px) {
