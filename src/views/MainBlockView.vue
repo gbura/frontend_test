@@ -54,7 +54,7 @@ const replaceQuote = () => {
 			addedQuotes.value = [remainingQuotes[randomIndex]]
 			break
 		default:
-			toast.error('You have to choose some option in block one.')
+			toast.error('Musisz wybrać którąś z dostępnych opcji w pierwszym bloku!')
 			break
 	}
 	updateLocalStorage()
@@ -62,14 +62,14 @@ const replaceQuote = () => {
 
 const addQuote = () => {
 	if (!selectedOption.value) {
-		toast.error('You have to choose some option in block one.')
+		toast.error('Musisz wybrać którąś z dostępnych opcji w pierwszym bloku!')
 		return
 	}
 
 	const unusedQuotes = db.filter(item => !addedQuotes.value.some(added => added.id === item.id))
 
 	if (unusedQuotes.length === 0) {
-		toast.error(`Can't add more quotes because there are none left.`)
+		toast.error(`Nie możesz dodać więcej cytatów, bo wszystkie zostały już wykorzystane.`)
 		return
 	}
 
@@ -84,7 +84,7 @@ const addQuote = () => {
 	})
 
 	if (filteredQuotes.length === 0) {
-		toast.error(`This quote is already added.`)
+		toast.error(`Ten cytat został już dodany.`)
 		return
 	}
 
@@ -92,7 +92,7 @@ const addQuote = () => {
 	const newQuote = filteredQuotes[randomIndex]
 
 	if (addedQuotes.value.some(item => item.id === newQuote.id)) {
-		toast.error(`The quote with id ${newQuote.id} is already added.`)
+		toast.error(`Ten cytat z id ${newQuote.id} został już dodany.`)
 	} else {
 		addedQuotes.value.push(newQuote)
 		updateLocalStorage()
