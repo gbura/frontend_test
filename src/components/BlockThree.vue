@@ -18,13 +18,13 @@
 							<font-awesome-icon :icon="['fas', 'floppy-disk']" class="edit-modal__save-button--icon" />
 						</button>
 					</div>
-					<p v-else class="quote" :aria-label="quote.quote">
+					<article v-else class="quote" :aria-label="quote.quote">
 						{{ quote.quote }}
 						<span class="quote__icon">
 							<font-awesome-icon :icon="['fas', 'trash']" class="quote__icon--trash" @click="deleteQuote(quote.id)" />
 							<font-awesome-icon :icon="['fas', 'pen-to-square']" class="quote__icon--edit" @click="editQuote(quote)" />
 						</span>
-					</p>
+					</article>
 				</template>
 			</TransitionGroup>
 		</div>
